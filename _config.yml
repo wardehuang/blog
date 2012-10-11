@@ -2,3 +2,4 @@ markdown: rdiscount
 pygments: true
 paginate: 20
 permalink: /post/:title.html
+baseurl: /blog
