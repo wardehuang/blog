@@ -3,3 +3,4 @@ pygments: true
 paginate: 20
 permalink: /post/:title.html
 baseurl: /blog
+url: http://jachohx.github.com/blog/
