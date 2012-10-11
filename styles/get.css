@@ -1,0 +1,234 @@
+/* global */
+
+:link {
+    color: #336699;
+    text-decoration: none;
+}
+
+:visited {
+    color: #6699CC;
+    text-decoration: none;
+}
+
+:link:hover, *:link:focus, *:link:active {
+    color: #2255AA;
+    text-decoration: underline;
+}
+
+hr {
+    border-color:  #BBBBBB;
+    border-style: none none solid none;
+    border-width: medium medium 1px medium;
+}
+
+h1 {
+    color: #333333;
+    font-size: 1.6em;
+    font-weight: bold;
+}
+
+h2 {
+    color: #333333;
+    font-size: 1.4em;
+    font-weight: bold;
+    border-bottom: 1px dashed #BBBBBB;
+    padding-bottom: 0.2em;
+}
+
+h3 {
+    font-size: 1.2em;
+    color: #333333;
+    font-weight: bold;
+    margin: 1em 0;
+}
+
+h4 {
+    font-size: 1em;
+    color: #333333;
+    font-weight: bold;
+}
+
+h5 {
+    font-size: 1em;
+    color: #333333;
+    font-weight: normal;
+}
+
+h6 {
+    font-size: 1em;
+    color: #333333;
+    font-weight: inherit;
+}
+
+p {
+    line-height: 1.6em;
+}
+
+li {
+    line-height: 1.6em;
+}
+
+/* table */
+
+table {
+    border-right: 1px solid #BBBBBB;
+    border-bottom: 1px solid #BBBBBB;
+    border-spacing: 0;
+}
+
+th, td {
+    border-left: 1px solid #BBBBBB;
+    border-top: 1px solid #BBBBBB;
+    padding: 0.5em;
+    text-align: left;
+}
+
+tbody tr:nth-child(2n+1) td, tbody tr:nth-child(2n+1) th {
+    background-color: #F9F9F9;
+}
+
+/* layout */
+
+body {
+    background: none repeat scroll 0 0 #FAFCF5;
+    font-family: "Lucida Grande","Lucida Sans Unicode","DejaVu Sans",Lucida,Arial,Helvetica,sans-serif;
+    font-size: 15px;
+    margin: auto;
+    width: 800px;
+}
+
+#main {
+    margin: 20px 0;
+    clear: both;
+    background-color: #FFFFFF;
+    border-color: transparent;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+#content {
+    padding: 15px 30px;
+}
+
+header {
+    background: none repeat scroll 0 0 #E6EFF7;
+    font-size: 2em;
+    padding: 15px 30px;
+}
+
+footer {
+    background: none repeat scroll 0 0 #E6EFF7;
+    font-weight: bold;
+    padding: 15px 30px;
+}
+
+footer .contact {
+    display: inline-block;
+    margin-right: 3em;
+}
+
+footer .other {
+    display: inline-block;
+    float: right;
+}
+
+footer p {
+    margin: 0;
+}
+
+/* indexing */
+
+#posts .date {
+    font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+}
+
+#pagination {
+    height: 18px;
+    clear: both;
+}
+
+#pagination .next {
+    float: right;
+}
+
+/* content */
+
+#post-meta {
+    font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+}
+
+#post-meta ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+
+#post-meta li {
+    display: inline;
+}
+
+#post-meta label {
+    color: #FF4500;
+    font-weight: bold;
+}
+
+#post-content code {
+    background-color: #F7F7F9;
+    border: 1px dashed #7F8CAB;
+    border-radius: 2px 2px 2px 2px;
+    color: #FF4500;
+    font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+    font-size: 0.9em;
+    padding: 0.1em 0.25em;
+}
+
+#post-content pre {
+    background-color: #F7F7F9;
+    border: 1px dashed #7F8CAB;
+    border-radius: 2px 2px 2px 2px;
+    font-weight: normal;
+    line-height: 15px;
+    margin: 15px 0;
+    overflow: auto;
+    padding: 1em;
+}
+
+#post-content pre code {
+    border: medium none;
+    color: #48484C;
+    padding: 0;
+}
+
+#post-content img {
+    max-width: 100%;
+}
+
+#post-content hr {
+    border-bottom: 1px dashed #BBBBBB;
+}
+
+#post-content kbd {
+    background: none repeat scroll 0 0 #EEEEEE;
+    border-color: #CCCCCC #AAAAAA #888888 #BBBBBB;
+    border-style: solid;
+    border-width: 1px 3px 3px 1px;
+    color: #000000;
+    font-family: "Consolas","Bitstream Vera Sans Mono","Courier New",Courier,monospace;
+    font-size: 0.8em;
+    line-height: 18px;
+    margin: 0 4px;
+    padding: 3px 4px;
+    white-space: nowrap;
+}
+
+#post-navs {
+    height: 18px;
+    clear: both;
+}
+
+#post-navs .next {
+    float: right;
+}
+
+#post-comment {
+    margin-top: 1em;
+}

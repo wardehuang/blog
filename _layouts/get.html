@@ -1,0 +1,55 @@
+---
+layout: default
+---
+
+<div id="post">
+
+    <h1 id="post-title">{{ page.title }}</h1>
+    <hr >
+
+    <div id="post-meta">
+        <ul>
+
+            <li>
+                <label>发布</label>
+                <span>{{ page.date | date: "%Y-%m-%d %H:%M" }}</span>
+            </li>
+
+            <li>
+                <label>分类</label>
+                {% if page.categories[0] == "tech" %}
+                    <a href="#/category/tech">技术</a>
+                {% else %}
+                    <a href="#/category/life">扯淡</a>
+                {% endif %}
+            </li>
+
+            <li>
+                <label>标签</label>
+                {% for tag in page.tags %}
+                    <a href="#/tag/{{tag}}">{{ tag }}</a>
+                {% endfor %}
+            </li>
+
+        </ul>
+    </div>
+
+    <div id="post-content">
+        {{ content }}
+    </div>
+
+    <div id="post-navs">
+
+        {% if page.previous %}
+            <a class="previous" href="{{page.previous.url}}">« {{ page.previous.title }}</a>
+        {% endif %}
+
+        {% if page.next %}
+            <a class="next" href="{{page.next.url}}">{{ page.next.title }} »</a>
+        {% endif %}
+
+    </div>
+
+    <hr >
+
+</div>
