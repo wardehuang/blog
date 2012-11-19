@@ -1,11 +1,65 @@
----
-layout: default
-title: 我的Blog
----
-<h2>{{ page.title }}</h2>
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jacho - 我的Blog</title>
+<link rel="stylesheet" href="/styles/get.css"/>
+<link rel="alternate" type="application/atom+xml" title="订阅 Atom Feed" href="http://feeds.feedburner.com/jachohx"/>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', UA-35504774-1]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</head>
+<body>
+<div id="main">
+
+    <header>
+        <a href="/">jacho</a>
+    </header>
+
+    <div id="content">
+    <h2>我的Blog</h2>
 <p>最新文章</p>
 <ul>
-　　{% for post in site.posts %}
-　　　<li>{{ post.date | date_to_string }} <a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></li>
-　　{% endfor %}
+　　
+　　　<li>16 Nov 2012 <a href="/post/Integer.html">Integer的自动装箱与拆箱</a></li>
+　　
+　　　<li>11 Oct 2012 <a href="/post/github-pages.html">使用Github Pages建独立博客</a></li>
+　　
 </ul>
+    </div>
+
+    <footer>
+        <div class="contact">
+            <p>
+                jacho<br />
+                jachohuang@gmail.com
+            </p>
+        </div>
+
+        <div class="contact">
+            <p>
+                <a href="http://twitter.com/jachohx/">twitter.com/jachohx</a><br />
+                <a href="http://github.com/jachohx/">github.com/jachohx</a><br />
+            </p>
+        </div>
+
+        <div class="other">
+            <p>
+                <a href="http://feeds.feedburner.com/jachohx">订阅</a><br />
+            </p>
+        </div>
+    </footer>
+
+</div>
+</body>
+</html>
