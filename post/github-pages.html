@@ -430,6 +430,11 @@ sudo gem sources -a http://ruby.taobao.org/
 <pre><code>$ sudo gem install jekyll
 </code></pre>
 
+<p>如果这个时候出现gem找不到，则要安装ruby</p>
+
+<pre><code>sudo apt-get install ruby1.9.1-dev
+</code></pre>
+
 <p>我到了这一步的时候总是提示错误<code>Failed to build gem native extension</code>，很可能的一个原因是没有安装rvm，<a href="https://rvm.io/rvm/install/">rvm的安装</a>可以参考这里，或者敲入下面的命令：</p>
 
 <pre><code>$ curl -L https://get.rvm.io | bash -s stable --ruby

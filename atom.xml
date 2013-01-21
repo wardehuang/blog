@@ -5,14 +5,14 @@
     <link href="http://blog.jachohx.com/"/>
     <link href="http://blog.jachohx.com/atom.xml" rel="self"/>
     <id>http://blog.jachohx.com/</id>
-    <updated>2012-11-20T17:31:52+08:00</updated>
+    <updated>2013-01-21T15:39:19+00:00</updated>
 
     
         <entry>
             <id>http://blog.jachohx.com/post/Integer</id>
             <title>Integer的自动装箱与拆箱</title>
             <link href="http://qixinglu.com/post/Integer.html"/>
-            <updated>2012-11-16T00:00:00+08:00</updated>
+            <updated>2012-11-16T00:00:00+00:00</updated>
             <author>
                 <name>muzuiget</name>
             </author>
@@ -129,7 +129,7 @@ System.out.println(Integer.valueOf(129) == Integer.valueOf(129));
             <id>http://blog.jachohx.com/post/github-pages</id>
             <title>使用Github Pages建独立博客</title>
             <link href="http://qixinglu.com/post/github-pages.html"/>
-            <updated>2012-10-11T00:00:00+08:00</updated>
+            <updated>2012-10-11T00:00:00+00:00</updated>
             <author>
                 <name>muzuiget</name>
             </author>
@@ -495,6 +495,11 @@ sudo gem sources -a http://ruby.taobao.org/
 &lt;p&gt;不过一般如果有出错提示，你可能需要这样安装：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ sudo gem install jekyll
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果这个时候出现gem找不到，则要安装ruby&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sudo apt-get install ruby1.9.1-dev
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;我到了这一步的时候总是提示错误&lt;code&gt;Failed to build gem native extension&lt;/code&gt;，很可能的一个原因是没有安装rvm，&lt;a href=&quot;https://rvm.io/rvm/install/&quot;&gt;rvm的安装&lt;/a&gt;可以参考这里，或者敲入下面的命令：&lt;/p&gt;
