@@ -5,26 +5,18 @@
     <link href="http://blog.jachohx.com/"/>
     <link href="http://blog.jachohx.com/atom.xml" rel="self"/>
     <id>http://blog.jachohx.com/</id>
-    <updated>2013-02-07T14:53:45+00:00</updated>
+    <updated>2013-02-07T14:58:42+00:00</updated>
 
     
         <entry>
             <id>http://blog.jachohx.com/post/jekyll-rsync</id>
-            <title>Jekyll Rsync</title>
+            <title>用vps写jekyll</title>
             <link href="http://qixinglu.com/post/jekyll-rsync.html"/>
             <updated>2013-02-06T00:00:00+00:00</updated>
             <author>
                 <name>muzuiget</name>
             </author>
-            <content type="html">&lt;p&gt;﻿---
-layout: post
-title: 用vps写jekyll
-description: 用rsync同步post文件到vps，再提交静态页面到github
-category: tech&lt;/p&gt;
-
-&lt;h2&gt;tags: [shell]&lt;/h2&gt;
-
-&lt;p&gt;用github写博客，把_post下的文件放到github上，用它的jekyll来生成静态文件，不过有一个问题，它的jekyll版本可能跟我的不一样，别人也有遇到这样的情况。&lt;/p&gt;
+            <content type="html">&lt;p&gt;用github写博客，把_post下的文件放到github上，用它的jekyll来生成静态文件，不过有一个问题，它的jekyll版本可能跟我的不一样，别人也有遇到这样的情况。&lt;/p&gt;
 
 &lt;p&gt;所以自己生成静态文件，再放到github上会更佳。&lt;/p&gt;
 
