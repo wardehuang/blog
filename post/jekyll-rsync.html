@@ -1,0 +1,96 @@
+<p>﻿---
+layout: post
+title: 用vps写jekyll
+description: 用rsync同步post文件到vps，再提交静态页面到github
+category: tech</p>
+
+<h2>tags: [shell]</h2>
+
+<p>用github写博客，把_post下的文件放到github上，用它的jekyll来生成静态文件，不过有一个问题，它的jekyll版本可能跟我的不一样，别人也有遇到这样的情况。</p>
+
+<p>所以自己生成静态文件，再放到github上会更佳。</p>
+
+<p>在Windows在要搭jekyll，安装起来真的很麻烦，各种折腾。</p>
+
+<p>现在md的语法熟悉了之后，就没有必要蛋痛地在本地搭jekyll。</p>
+
+<p>于是在VPS上搭了一个jekyll环境，然后只需要把源文件同步到vps上就可以了。</p>
+
+<p>在Windows下用rsync这个工具可以还是不错的。</p>
+
+<p>upload.bat脚本：</p>
+
+<pre><code>bin\rsync -av /blog/src/ user@ip::blog
+</code></pre>
+
+<p>blog是在vps上的/etc/rsyncd.conf上加上</p>
+
+<pre><code>[blog]
+path=/var/www/blog/src
+read only=false
+auth users=user
+</code></pre>
+
+<p>down.bat</p>
+
+<pre><code>bin\rsync -av rsync@216.18.193.125::blog /blog/src/
+</code></pre>
+
+<p>upload.bat与down.bat文件放在rsync的bin同级目录，且当前有/src/blog目录</p>
+
+<p>现在的问题是，如何在vps上把post文件生成静态文件，然后再上传到github。</p>
+
+<p>blog下的目录是这样的</p>
+
+<pre><code>|-- git (git静态文件)
+|-- log (更新日志)
+|-- src (jekyll项目)
+|   |-- (jekyll配置)
+|   `-- update.txt
+|-- check.sh
+|-- git.sh
+|-- time
+|-- update.sh
+</code></pre>
+
+<p>check.sh 定时检查项目有没有更新，time记录下上一次的更新时间，update.txt是每次要提交的更新说明，如果有修改，说明有更新</p>
+
+<pre><code>cd /var/www/blog
+time=`stat -c %Z  src/update.txt`
+last=`cat time`
+if [[ $time -ne $last ]];then
+./update.sh
+echo $time &gt; time
+fi
+</code></pre>
+
+<p>update.sh 检查到有更新，用jekyll生成静态文件</p>
+
+<pre><code>base=/var/www/blog
+cd $base/src
+jekyll
+commit=`cat update.txt`
+cd $base
+log=$base/log/git.log
+$base/git.sh $commit &gt;&gt; $log
+</code></pre>
+
+<p>git.sh 把静态文件的修改更新到github上</p>
+
+<pre><code>commit=$1
+cd /var/www/blog
+cp -rf src/_site/* git/
+cd git
+echo '------------------------------'
+echo $commit
+echo  `date  '+%Y-%m-%d %T'` 
+git st
+git add .
+for delfile in `git st | grep deleted | awk '{print $3}'`;do
+git rm $delfile
+done
+git cm "$commit"
+git push 
+</code></pre>
+
+<p>OK，到这样的话就可以在windows下写md文件，且同步到github上了</p>
