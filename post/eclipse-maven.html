@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <title>
         
-            用vps写jekyll
+            Eclipse下将项目增加maven配置
                  
     </title>
     <meta name="generator" content="Jekyll" />
     <meta name="author" content="jacho" />
-    <meta name="description" content="用rsync同步post文件到vps,再提交静态页面到github" />
+    <meta name="description" content="Eclipse下将项目增加maven配置" />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="/css/violet.css" type="text/css" />
     <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="http://feeds.feedburner.com/jachohx" />
@@ -52,118 +52,78 @@
                 <div class="v-section-tit">
                     <a href="/" rel="nofollow" >首页</a>
                     <span>&#9830;</span>
-                    <h2>用vps写jekyll</h2>
+                    <h2>Eclipse下将项目增加maven配置</h2>
                 </div>
                 <div class="violet-post-det fn-clear">
                     <div class="ui-grid-15 v-post-detail">
                         <div class="v-entry">
-                            <h1 class="title">用vps写jekyll</h1>
-                            <p class="meta"><time class="date" pubdate="2013-02-06">2013-02-06</time> By <a href="/contact.html" class="author" title="author">jacho</a>
+                            <h1 class="title">Eclipse下将项目增加maven配置</h1>
+                            <p class="meta"><time class="date" pubdate="2013-03-07">2013-03-07</time> By <a href="/contact.html" class="author" title="author">jacho</a>
 							<label>分类</label>
 							
 								<a href="#/category/tech">技术</a>
 							
 							<label>标签</label>
 							
-								<a href="#/tag/shell">shell</a>
+								<a href="#/tag/eclipse">eclipse</a>
 							</p>
-                            <p class="description">用rsync同步post文件到vps,再提交静态页面到github</p>
-                            <p>用github写博客，把_post下的文件放到github上，用它的jekyll来生成静态文件，不过有一个问题，它的jekyll版本可能跟我的不一样，别人也有遇到这样的情况。</p>
+                            <p class="description">Eclipse下将项目增加maven配置</p>
+                            <p>最近的项目开始使用maven做托管，于是开始熟悉maven环境，安装，配置那些就不用多说了，直接用eclipse默认的就OK了。</p>
 
-<p>所以自己生成静态文件，再放到github上会更佳。</p>
+<p>关键在于，有时新建的项目不能导入maven的依赖包，虽然maven可以compile，但源代码会有报错。</p>
 
-<p>在Windows在要搭jekyll，安装起来真的很麻烦，各种折腾。</p>
+<p>出现红叉看起来很是不错。</p>
 
-<p>现在md的语法熟悉了之后，就没有必要蛋痛地在本地搭jekyll。</p>
+<p>于是开始研究一些可以自动导入maven包的项目。</p>
 
-<p>于是在VPS上搭了一个jekyll环境，然后只需要把源文件同步到vps上就可以了。</p>
+<h2>.project 增加maven项目</h2>
 
-<p>在Windows下用rsync这个工具可以还是不错的。</p>
+<p>项目的配置文件.project 在<projectDescription>下的配置如下：</p>
 
-<p>upload.bat脚本：</p>
-
-<pre><code>bin\rsync -av /blog/src/ user@ip::blog
+<pre><code>&lt;buildSpec&gt;
+    &lt;buildCommand&gt;
+        &lt;name&gt;org.eclipse.jdt.core.javabuilder&lt;/name&gt;
+        &lt;arguments&gt;
+        &lt;/arguments&gt;
+    &lt;/buildCommand&gt;
+    &lt;buildCommand&gt;
+        &lt;name&gt;org.eclipse.m2e.core.maven2Builder&lt;/name&gt;
+        &lt;arguments&gt;
+        &lt;/arguments&gt;
+    &lt;/buildCommand&gt;
+&lt;/buildSpec&gt;
+&lt;natures&gt;
+    &lt;nature&gt;org.eclipse.jdt.core.javanature&lt;/nature&gt;
+    &lt;nature&gt;org.eclipse.m2e.core.maven2Nature&lt;/nature&gt;
+&lt;/natures&gt;
 </code></pre>
 
-<p>blog是在vps上的/etc/rsyncd.conf上加上</p>
+<p>只要buildSpec，natures下加入m2e的那两段代码就可以了。</p>
 
-<pre><code>[blog]
-path=/var/www/blog/src
-read only=false
-auth users=user
+<p>在.project下增加了那两段代码后，项目及pom.xml可以右键run maven。</p>
+
+<p>但是这样还是没有引入maven依赖。</p>
+
+<h2>.classpath 增加maven 的依赖</h2>
+
+<p>而.classpath下多了这几行代码：</p>
+
+<pre><code>&lt;classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER"&gt;
+    &lt;attributes&gt;
+        &lt;attribute name="maven.pomderived" value="true"/&gt;
+    &lt;/attributes&gt;
+&lt;/classpathentry&gt;
 </code></pre>
 
-<p>down.bat</p>
+<p>只要把以上的代码加入到<classpath>下就可以了。maven的包依赖就会导入了。</p>
 
-<pre><code>bin\rsync -av rsync@216.18.193.125::blog /blog/src/
-</code></pre>
-
-<p>upload.bat与down.bat文件放在rsync的bin同级目录，且当前有/src/blog目录</p>
-
-<p>现在的问题是，如何在vps上把post文件生成静态文件，然后再上传到github。</p>
-
-<p>blog下的目录是这样的</p>
-
-<pre><code>|-- git (git静态文件)
-|-- log (更新日志)
-|-- src (jekyll项目)
-|   |-- (jekyll配置)
-|   `-- update.txt
-|-- check.sh
-|-- git.sh
-|-- time
-|-- update.sh
-</code></pre>
-
-<p>check.sh 定时检查项目有没有更新，time记录下上一次的更新时间，update.txt是每次要提交的更新说明，如果有修改，说明有更新</p>
-
-<pre><code>cd /var/www/blog
-time=`stat -c %Z  src/update.txt`
-last=`cat time`
-if [[ $time -ne $last ]];then
-./update.sh
-echo $time &gt; time
-fi
-</code></pre>
-
-<p>update.sh 检查到有更新，用jekyll生成静态文件</p>
-
-<pre><code>base=/var/www/blog
-cd $base/src
-jekyll
-commit=`cat update.txt`
-cd $base
-log=$base/log/git.log
-$base/git.sh $commit &gt;&gt; $log
-</code></pre>
-
-<p>git.sh 把静态文件的修改更新到github上</p>
-
-<pre><code>commit=$1
-cd /var/www/blog
-cp -rf src/_site/* git/
-cd git
-echo '------------------------------'
-echo $commit
-echo  `date  '+%Y-%m-%d %T'` 
-git st
-git add .
-for delfile in `git st | grep deleted | awk '{print $3}'`;do
-git rm $delfile
-done
-git cm "$commit"
-git push 
-</code></pre>
-
-<p>OK，到这样的话就可以在windows下写md文件，且同步到github上了</p>
+<p>好了，只要在这两个配置文件里增加了了maven配置，整个maven就可以用了。</p>
 
                         </div>
                         <nav class="v-pagination">
                             
-                            <a class="prev" href="/post/Integer.html" rel="bookmark">&laquo;&nbsp;Integer的自动装箱与拆箱</a>
+                            <a class="prev" href="/post/jekyll-rsync.html" rel="bookmark">&laquo;&nbsp;用vps写jekyll</a>
                             
-                            
-                            <a class="next" href="/post/eclipse-maven.html" rel="bookmark">Eclipse下将项目增加maven配置&nbsp;&raquo;</a>
                             
                          </nav>
                          <div class="violet-comment">

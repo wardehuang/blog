@@ -5,8 +5,69 @@
     <link href="http://blog.jachohx.com/"/>
     <link href="http://blog.jachohx.com/atom.xml" rel="self"/>
     <id>http://blog.jachohx.com/</id>
-    <updated>2013-02-07T15:22:15+00:00</updated>
+    <updated>2013-03-07T16:14:41+00:00</updated>
 
+    
+        <entry>
+            <id>http://blog.jachohx.com/post/eclipse-maven</id>
+            <title>Eclipse下将项目增加maven配置</title>
+            <link href="http://qixinglu.com/post/eclipse-maven.html"/>
+            <updated>2013-03-07T00:00:00+00:00</updated>
+            <author>
+                <name>muzuiget</name>
+            </author>
+            <content type="html">&lt;p&gt;最近的项目开始使用maven做托管，于是开始熟悉maven环境，安装，配置那些就不用多说了，直接用eclipse默认的就OK了。&lt;/p&gt;
+
+&lt;p&gt;关键在于，有时新建的项目不能导入maven的依赖包，虽然maven可以compile，但源代码会有报错。&lt;/p&gt;
+
+&lt;p&gt;出现红叉看起来很是不错。&lt;/p&gt;
+
+&lt;p&gt;于是开始研究一些可以自动导入maven包的项目。&lt;/p&gt;
+
+&lt;h2&gt;.project 增加maven项目&lt;/h2&gt;
+
+&lt;p&gt;项目的配置文件.project 在&lt;projectDescription&gt;下的配置如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;buildSpec&amp;gt;
+    &amp;lt;buildCommand&amp;gt;
+        &amp;lt;name&amp;gt;org.eclipse.jdt.core.javabuilder&amp;lt;/name&amp;gt;
+        &amp;lt;arguments&amp;gt;
+        &amp;lt;/arguments&amp;gt;
+    &amp;lt;/buildCommand&amp;gt;
+    &amp;lt;buildCommand&amp;gt;
+        &amp;lt;name&amp;gt;org.eclipse.m2e.core.maven2Builder&amp;lt;/name&amp;gt;
+        &amp;lt;arguments&amp;gt;
+        &amp;lt;/arguments&amp;gt;
+    &amp;lt;/buildCommand&amp;gt;
+&amp;lt;/buildSpec&amp;gt;
+&amp;lt;natures&amp;gt;
+    &amp;lt;nature&amp;gt;org.eclipse.jdt.core.javanature&amp;lt;/nature&amp;gt;
+    &amp;lt;nature&amp;gt;org.eclipse.m2e.core.maven2Nature&amp;lt;/nature&amp;gt;
+&amp;lt;/natures&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只要buildSpec，natures下加入m2e的那两段代码就可以了。&lt;/p&gt;
+
+&lt;p&gt;在.project下增加了那两段代码后，项目及pom.xml可以右键run maven。&lt;/p&gt;
+
+&lt;p&gt;但是这样还是没有引入maven依赖。&lt;/p&gt;
+
+&lt;h2&gt;.classpath 增加maven 的依赖&lt;/h2&gt;
+
+&lt;p&gt;而.classpath下多了这几行代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;classpathentry kind=&quot;con&quot; path=&quot;org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER&quot;&amp;gt;
+    &amp;lt;attributes&amp;gt;
+        &amp;lt;attribute name=&quot;maven.pomderived&quot; value=&quot;true&quot;/&amp;gt;
+    &amp;lt;/attributes&amp;gt;
+&amp;lt;/classpathentry&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;只要把以上的代码加入到&lt;classpath&gt;下就可以了。maven的包依赖就会导入了。&lt;/p&gt;
+
+&lt;p&gt;好了，只要在这两个配置文件里增加了了maven配置，整个maven就可以用了。&lt;/p&gt;
+</content>
+        </entry>
     
         <entry>
             <id>http://blog.jachohx.com/post/jekyll-rsync</id>
